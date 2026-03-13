@@ -3,7 +3,7 @@ import Navbar from '@/components/home/header/navbar';
 import HeroSection from '@/components/home/heroSection';
 import TopArticles from '@/components/home/topArticles';
 
-export default function Home() {
+export default function page() {
   return (
     <div>
       <Navbar />
