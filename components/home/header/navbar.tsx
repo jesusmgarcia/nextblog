@@ -6,6 +6,7 @@ import { useState } from 'react';
 import SearchInput from './searchInput';
 import { Search, Menu, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -62,6 +63,21 @@ const Navbar = () => {
 
             {/* Theme Toggle */}
             <ThemeModeToggle />
+
+            {/* Clerk User Actions */}
+            <Show when='signed-out'>
+              <div className='hidden md:flex items-center gap-2'>
+                <SignInButton>
+                  <Button variant='outline'>Login</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button>Sign up</Button>
+                </SignUpButton>
+              </div>
+            </Show>
+            <Show when='signed-in'>
+              <UserButton />
+            </Show>
 
             {/* Mobile Menu Button */}
             <Button

@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, JetBrains_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/themeProvider';
+import { ClerkProvider } from '@clerk/nextjs';
+import { ui } from '@clerk/ui';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -35,14 +37,16 @@ export default function RootLayout({
       className={cn(jetbrainsMono.variable, 'font-sans', inter.variable)}
     >
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div>{children}</div>
-        </ThemeProvider>
+        <ClerkProvider ui={ui}>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div>{children}</div>
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
