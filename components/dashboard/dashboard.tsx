@@ -1,13 +1,30 @@
 import { FileText, MessageCircle, PlusCircle, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import RecentArticles from './recentArticles';
 
-const articles = Array(20);
-const totalComments = 123;
+export async function Dashboard() {
+  const [articles, totalComments] = await Promise.all([
+    prisma.articles.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        comments: true,
+        author: {
+          select: {
+            name: true,
+            email: true,
+            imageUrl: true,
+          },
+        },
+      },
+    }),
+    prisma.comment.count(),
+  ]);
 
-export function Dashboard() {
   return (
     <main className='flex-1 p-4 md:p-8'>
       {/* Header */}

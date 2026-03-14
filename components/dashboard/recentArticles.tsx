@@ -11,8 +11,24 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Link from 'next/link';
+import { Prisma } from '@/app/generated/prisma/client';
 
-const RecentArticles: React.FC = ({ articles }) => {
+type RecentArticlesProps = {
+  articles: Prisma.ArticlesGetPayload<{
+    include: {
+      comments: true;
+      author: {
+        select: {
+          name: true;
+          email: true;
+          imageUrl: true;
+        };
+      };
+    };
+  }>[];
+};
+
+const RecentArticles: React.FC<RecentArticlesProps> = ({ articles }) => {
   return (
     <Card className='mb-8'>
       <CardHeader>
