@@ -82,7 +82,7 @@ export const EditArticleAction = async (
   // ✅ Check if a new image is provided
   const imageFile = formData.get('featuredImage') as File | null;
 
-  if (imageFile && imageFile.size > 0 && imageFile.name !== 'undefined') {
+  if (imageFile && imageFile.name !== 'undefined') {
     try {
       const arrayBuffer = await imageFile.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);

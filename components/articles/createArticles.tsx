@@ -20,6 +20,12 @@ const CreateArticles = () => {
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     formData.append('content', content);
 
+    // Clear the field if not file is specified
+    const featuredImageFile = formData.get('featuredImage') as File;
+    if (!featuredImageFile || featuredImageFile.size === 0) {
+      formData.delete('featuredImage');
+    }
+
     // Wrap the action call in startTransition
     startTransition(() => {
       action(formData);
