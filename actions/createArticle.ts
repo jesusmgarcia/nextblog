@@ -28,7 +28,7 @@ type CreateArticleFormState = {
   };
 };
 
-export const createArticle = async (
+export const CreateArticleAction = async (
   prevState: CreateArticleFormState,
   formData: FormData,
 ): Promise<CreateArticleFormState> => {
