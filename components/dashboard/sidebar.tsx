@@ -13,10 +13,9 @@ const Sidebar = () => {
       {/* Mobile Sidebar */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          // DEBUG: Shows error button inside button
-          {/*<Button variant='outline' className='md:hidden m-4'>
-            <LayoutDashboard className='h-5 w-5' />
-          </Button>*/}
+          {/*<Button variant='outline' className='md:hidden m-4'>*/}
+          <LayoutDashboard className='h-5 w-5' />
+          {/*</Button>*/}
         </SheetTrigger>
         <SheetContent side='left' className='w-62.5'>
           <DashboardSidebar closeSheet={() => setIsOpen(false)} />

@@ -34,7 +34,7 @@ export default function RootLayout({
     <html
       lang='en'
       suppressHydrationWarning
-      className={cn(jetbrainsMono.variable, 'font-sans', inter.variable)}
+      className={cn(jetbrainsMono.variable, 'font-sans', "font-sans", inter.variable)}
     >
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClerkProvider ui={ui}>
