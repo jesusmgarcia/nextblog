@@ -1,9 +1,16 @@
 'use client';
 import { useState } from 'react';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { BarChart, FileText, LayoutDashboard, MessageCircle, Settings } from 'lucide-react';
 import Link from 'next/link';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,11 +20,15 @@ const Sidebar = () => {
       {/* Mobile Sidebar */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          {/*<Button variant='outline' className='md:hidden m-4'>*/}
-          <LayoutDashboard className='h-5 w-5' />
-          {/*</Button>*/}
+          <Button variant='outline' className='md:hidden m-4'>
+            <LayoutDashboard className='h-5 w-5' />
+          </Button>
         </SheetTrigger>
         <SheetContent side='left' className='w-62.5'>
+          <VisuallyHidden>
+            <SheetTitle>Sidebar</SheetTitle>
+            <SheetDescription>Main navigation sidebar</SheetDescription>
+          </VisuallyHidden>
           <DashboardSidebar closeSheet={() => setIsOpen(false)} />
         </SheetContent>
       </Sheet>
