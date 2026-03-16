@@ -5,50 +5,25 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
+import { prisma } from '@/lib/prisma';
 
-const articles = [
-  {
-    id: 0,
-    title: 'Title 1',
-    author: {
-      name: 'Author 1',
-      imageUrl:
-        'https://images.unsplash.com/photo-1600486913747-55e5470d6f40?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+const TopArticles = async () => {
+  const articles = await prisma.articles.findMany({
+    orderBy: {
+      createdAt: 'desc',
     },
-    featuredImage:
-      'https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    category: 'Development',
-    createdAt: Date.now(),
-  },
-  {
-    id: 1,
-    title: 'Title 2',
-    author: {
-      name: 'Author 2',
-      imageUrl:
-        'https://images.unsplash.com/photo-1600486913747-55e5470d6f40?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    include: {
+      comments: true,
+      author: {
+        select: {
+          name: true,
+          email: true,
+          imageUrl: true,
+        },
+      },
     },
-    featuredImage:
-      'https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    category: 'Development',
-    createdAt: Date.now(),
-  },
-  {
-    id: 2,
-    title: 'Title 3',
-    author: {
-      name: 'Author 3',
-      imageUrl:
-        'https://images.unsplash.com/photo-1600486913747-55e5470d6f40?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    featuredImage:
-      'https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    category: 'Development',
-    createdAt: Date.now(),
-  },
-];
+  });
 
-const TopArticles = () => {
   return (
     <section className='relative py-16 md:py-24'>
       <div className='container mx-auto px-4'>
