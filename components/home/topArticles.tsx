@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 import { prisma } from '@/lib/prisma';
+import { Badge } from '../ui/badge';
 
 const TopArticles = async () => {
   const articles = await prisma.articles.findMany({
@@ -73,7 +74,9 @@ const TopArticles = async () => {
                     <h3 className='mt-4 text-xl font-semibold text-gray-900 dark:text-white'>
                       {article.title}
                     </h3>
-                    <p className='mt-2 text-gray-600 dark:text-gray-300'>{article.category}</p>
+                    <Badge variant='secondary' className='mt-2 '>
+                      {article.category}
+                    </Badge>
 
                     {/* Article Meta Info */}
                     <div className='mt-6 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400'>

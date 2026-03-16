@@ -1,4 +1,4 @@
-const DashboardLoadingScreen = () => {
+const ArticleLoadingScreen = () => {
   return (
     <div className='flex items-center justify-center min-h-screen bg-linear-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800'>
       <div className='text-center flex flex-col items-center'>
@@ -7,14 +7,14 @@ const DashboardLoadingScreen = () => {
 
         {/* Loading Text */}
         <h1 className='text-2xl font-semibold text-gray-800 dark:text-gray-200'>
-          Loading Dashboard...
+          Loading Article...
         </h1>
         <p className='text-gray-600 dark:text-gray-400 mt-2'>
-          Please wait while we prepare your dashboard.
+          Please wait while we prepare your article.
         </p>
       </div>
     </div>
   );
 };
 
-export default DashboardLoadingScreen;
+export default ArticleLoadingScreen;

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Prisma } from '@/app/generated/prisma/client';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { Badge } from '../ui/badge';
 
 type SearchPageProps = {
   articles: Prisma.ArticlesGetPayload<{
@@ -47,8 +48,9 @@ export function AllArticles({ articles }: SearchPageProps) {
               </div>
               {/* Article Content */}
               <h3 className='text-xl font-semibold text-foreground'>{article.title}</h3>
-              <p className='mt-2 text-muted-foreground'>{article.category}</p>
-
+              <Badge variant='secondary' className='mt-2'>
+                {article.category}
+              </Badge>
               {/* Author & Metadata */}
               <div className='mt-6 flex items-center justify-between'>
                 <div className='flex items-center gap-3'>
