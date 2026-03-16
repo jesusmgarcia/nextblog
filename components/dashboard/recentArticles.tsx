@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import {
@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/table';
 import Link from 'next/link';
 import { Prisma } from '@/app/generated/prisma/client';
+import { deleteArticleAction } from '@/actions/deleteArticle';
 
 type RecentArticlesProps = {
   articles: Prisma.ArticlesGetPayload<{
@@ -91,10 +92,16 @@ type DeleteButtonProps = {
 };
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ articleId }) => {
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   return (
-    <form>
+    <form
+      action={() =>
+        startTransition(async () => {
+          await deleteArticleAction(articleId);
+        })
+      }
+    >
       <Button disabled={isPending} variant='ghost' size='sm' type='submit'>
         {isPending ? 'Deleting...' : 'Delete'}
       </Button>
